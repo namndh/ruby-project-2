@@ -1,0 +1,7 @@
+<%# Rails flash messages styled for Bootstrap 3.0 %>
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <%= javascript_include_tag "application" %>
+    <%= custom_bootstrap_flash %>
+  <% end %>
+<% end %>
