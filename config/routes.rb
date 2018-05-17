@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :songs
   namespace :admin do
       resources :users
       root to: "users#index"

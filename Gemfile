@@ -33,6 +33,9 @@ gem 'high_voltage'
 gem 'jquery-rails'
 gem 'simple_form'
 gem "font-awesome-rails"
+gem 'carrierwave'
+gem 'mini_magick'
+
 group :development do
   gem 'better_errors'
   gem 'rails_layout'
