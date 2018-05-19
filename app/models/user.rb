@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :songs
+  has_many :comments
+  has_many :likes
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

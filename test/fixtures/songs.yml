@@ -1,23 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 1
   title: MyString
-  singer: MyString
   artist: MyString
-  pic: MyString
-  file: MyString
-  file: MyString
   description: MyText
-  comments_count: 1
+  user: one
 
 two:
-  user_id: 1
   title: MyString
-  singer: MyString
   artist: MyString
-  pic: MyString
-  file: MyString
-  file: MyString
   description: MyText
-  comments_count: 1
+  user: two

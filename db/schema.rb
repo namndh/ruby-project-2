@@ -10,19 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_17_064653) do
+ActiveRecord::Schema.define(version: 2018_05_19_140634) do
 
-  create_table "songs", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "song_id"
     t.integer "user_id"
-    t.string "title"
-    t.string "singer"
-    t.string "artist"
-    t.string "pic"
-    t.string "file"
-    t.text "description"
-    t.integer "comments_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_comments_on_song_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "song_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_likes_on_song_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "title"
+    t.string "artist"
+    t.string "file"
+    t.text "description"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
