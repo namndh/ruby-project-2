@@ -16,6 +16,13 @@
       <td><%= link_to 'Destroy', song_path(song),
                       method: :delete,
                       data: {confirm: 'Are you sure?'} %></td>
+      <td>
+        <% if song.likes.find_by(user_id: current_user) %>
+          <%= link_to 'Unlike', [song, song.likes.build], method: :post %>
+        <% else %>
+          <%= link_to 'Like', [song, song.likes.build], method: :post %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

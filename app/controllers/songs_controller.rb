@@ -1,4 +1,10 @@
 class SongsController < ApplicationController
+
+  def hot_songs
+    @songs = Song.hot_songs
+    render 'index'
+  end
+
   def index
     @songs = Song.all.order("created_at desc")
     @hot_songs = Song.hot_songs

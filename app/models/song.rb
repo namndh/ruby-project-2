@@ -11,4 +11,12 @@ class Song < ApplicationRecord
 
   scope :hot_songs, -> {joins(:likes).group('songs.id').order('count(likes.id) desc').limit(10)}
 
+  def self.search(search)
+    # titleStr = title ? title : ''
+    # artistStr = artist ? artist : ''
+    where(["title like ? or artist like ?", "%#{search}%", "%#{search}%"])
+    # else
+    #   where(["title like ?", ''])
+    # end
+  end
 end

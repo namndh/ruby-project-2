@@ -1,3 +1,4 @@
+<h1><%= @song.title %> - <%= @song.artist %></h1>
 <p>
   <strong>Title:</strong>
   <%= @song.title %>
@@ -8,11 +9,13 @@
   <%= @song.artist %>
 </p>
 
-<!--<h2>Comments</h2>-->
-<%#= render @song.comments %>
+<%= link_to 'Like', [@song, @song.likes.build], method: :post %>
 
-<!--<h2>Add a comment:</h2>-->
-<%#= render 'comments/form' %>
+<h2>Comments</h2>
+<%= render @song.comments %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
 
 <td><%= link_to 'Edit', edit_song_path(@song) %></td>
 <%= link_to 'Back', songs_path %>

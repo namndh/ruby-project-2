@@ -1,0 +1,15 @@
+<p>
+  <strong>User:</strong>
+  <%= comment.user.email %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= comment.content %>
+</p>
+
+<p>
+  <%= link_to 'Destroy Comment', [comment.song, comment],
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+</p>
