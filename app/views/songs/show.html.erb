@@ -9,13 +9,24 @@
   <%= @song.artist %>
 </p>
 
-<%= link_to 'Like', [@song, @song.likes.build], method: :post %>
+<% if current_user %>
+  <% if @song.likes.find_by(user_id: current_user) %>
+    <%= link_to 'Unlike', [@song, @song.likes.build], method: :post %>
+  <% else %>
+    <%= link_to 'Like', [@song, @song.likes.build], method: :post %>
+  <% end %>
+<% end %>
 
 <h2>Comments</h2>
 <%= render @song.comments %>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+<% if current_user %>
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+<% end %>
 
-<td><%= link_to 'Edit', edit_song_path(@song) %></td>
+<% if current_user && current_user.id == @song.user.id %>
+  <td><%= link_to 'Edit', edit_song_path(@song) %></td>
+<% end %>
+
 <%= link_to 'Back', songs_path %>

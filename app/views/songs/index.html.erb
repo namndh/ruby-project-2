@@ -12,17 +12,21 @@
       <td><%= song.title %></td>
       <td><%= song.artist %></td>
       <td><%= link_to 'Show', song_path(song) %></td>
-      <td><%= link_to 'Edit', edit_song_path(song) %></td>
-      <td><%= link_to 'Destroy', song_path(song),
-                      method: :delete,
-                      data: {confirm: 'Are you sure?'} %></td>
-      <td>
-        <% if song.likes.find_by(user_id: current_user) %>
-          <%= link_to 'Unlike', [song, song.likes.build], method: :post %>
-        <% else %>
-          <%= link_to 'Like', [song, song.likes.build], method: :post %>
-        <% end %>
-      </td>
+      <% if current_user && current_user.id == song.user.id %>
+        <td><%= link_to 'Edit', edit_song_path(song) %></td>
+        <td><%= link_to 'Destroy', song_path(song),
+                        method: :delete,
+                        data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
+      <% if current_user %>
+        <td>
+          <% if song.likes.find_by(user_id: current_user) %>
+            <%= link_to 'Unlike', [song, song.likes.build], method: :post %>
+          <% else %>
+            <%= link_to 'Like', [song, song.likes.build], method: :post %>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

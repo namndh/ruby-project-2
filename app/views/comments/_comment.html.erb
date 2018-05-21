@@ -8,8 +8,10 @@
   <%= comment.content %>
 </p>
 
-<p>
-  <%= link_to 'Destroy Comment', [comment.song, comment],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-</p>
+<% if current_user && (current_user.id == comment.user.id || current_user.id == comment.song.id) %>
+  <p>
+    <%= link_to 'Destroy Comment', [comment.song, comment],
+                method: :delete,
+                data: {confirm: 'Are you sure?'} %>
+  </p>
+<% end %>
