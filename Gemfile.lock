@@ -69,6 +69,9 @@ GEM
     bindex (0.5.0)
     bootsnap (1.3.0)
       msgpack (~> 1.0)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -280,6 +283,7 @@ DEPENDENCIES
   administrate
   better_errors
   bootsnap (>= 1.1.0)
+  bootstrap-kaminari-views
   bootstrap-sass
   bourbon
   byebug
@@ -312,7 +316,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.2

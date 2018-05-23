@@ -1,8 +1,9 @@
-
-<div class="container-fluid" style="padding-top:50px;">
+<div class="container-fluid" style="padding-top:70px;">
   <div class="row">
-    <div class="col-md-7" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
-      <%= render 'form' %>
+    <div class="col-md-6 col-md-offset-3" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
+      <h3> Update <%= @song.title %> - <%= @song.artist %> </h3>
+      <p style="color:#C0C0C0">uploaded by - <%= @song.user.username %></p>
+      <%= render 'form_edit' %>
     </div>
   </div>
 </div>

@@ -2,28 +2,17 @@ class SongsController < ApplicationController
 
   def hot_songs
     @songs = Song.hot_songs
-    @new_songs = Song.all.order("created_at desc")
-    render 'index'
+    # @new_songs = Song.all.order("created_at desc")
   end
 
   def my_songs
     @songs = current_user.songs
-    render 'index'
+    render 'songs'
   end
 
   def index
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-      @username = @user.name
-      @songs = @user.songs
-    else
-      if current_user
-        @songs = current_user.songs
-      else
-        @songs = Song.hot_songs
-      end
-    end
-    @hot_songs = Song.hot_songs
+    @newest_songs = Song.all.order("created_at desc").page(params[:page]).per(20)
+    @hot_songs = Song.hot_songs.page(params[:page]).per(10)
   end
 
   def new
@@ -31,7 +20,7 @@ class SongsController < ApplicationController
   end
 
   def show
-    @hot_songs = Song.hot_songs
+    @hot_songs = Song.hot_songs.page(params[:page]).per(10)
     @song = Song.find(params[:id])
     @comments = @song.comments.order("created_at desc")
     @like_count = @song.likes.count
