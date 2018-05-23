@@ -16,6 +16,7 @@
 //= require_tree .
 // = require toastr
 //= require plyr
+//= require data-confirm-modal
 document.addEventListener("turbolinks:load", function() {
    const player = new Plyr('#player');
  });

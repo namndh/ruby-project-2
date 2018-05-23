@@ -103,6 +103,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    data-confirm-modal (1.6.2)
+      railties (>= 3.0)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
     devise (4.4.3)
@@ -285,6 +287,7 @@ DEPENDENCIES
   carrierwave
   chromedriver-helper
   coffee-rails (~> 4.2)
+  data-confirm-modal
   devise
   font-awesome-rails
   high_voltage

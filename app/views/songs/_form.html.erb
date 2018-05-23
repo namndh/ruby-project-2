@@ -1,41 +1,45 @@
 <%= form_with model: @song, local: true do |form| %>
 
-  <% if @song.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@article.errors.count, "error") %> prohibited
-        this song from being saved:
-      </h2>
-      <ul>
-        <% @song.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+  <div class="container-fluid" style="padding-top:20px">
+    <% if @song.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@article.errors.count, "error") %> prohibited
+          this song from being saved:
+        </h2>
+        <ul>
+          <% @song.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title %><br>
+      <%= form.text_field :title, class: 'form-control' %>
     </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= form.label :title %><br>
-    <%= form.text_field :title, class: 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= form.label :artist %><br>
+      <%= form.text_field :artist, class: 'form-control' %>
+    </div>
 
-  <p>
-    <%= form.label :artist %><br>
-    <%= form.text_area :artist %>
-  </p>
+    </p>
 
-  <div class="form-group">
-    <%= form.label :file %>
-    <%= form.file_field :file %>
-    <!-- <%= form.hidden_field :file_cache %> -->
+    <div class="form-group">
+      <%= form.label :file %>
+      <%= form.file_field :file%>
+      <!-- <%= form.hidden_field :file_cache %> -->
+    </div>
+    <div class="form-group">
+      <%= form.label :artwork %>
+      <%= form.file_field :artwork %>
+      <!-- <%= form.hidden_field :file_cache %> -->
+    </div>
+    <div class="form-group">
+      <%= form.submit 'Update', :class => 'btn btn-primary'%>
+    </div>
   </div>
-  <div class="form-group">
-    <%= form.label :artwork %>
-    <%= form.file_field :artwork %>
-    <!-- <%= form.hidden_field :file_cache %> -->
-  </div>
-  <p>
-    <%= form.submit %>
-  </p>
 
 <% end %>

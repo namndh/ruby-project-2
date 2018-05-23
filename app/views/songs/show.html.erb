@@ -1,26 +1,31 @@
--<div class="container-fluid" style="padding-top:50px;">
+<div class="container-fluid" style="padding-top:50px;">
   <div class="row">
-    <div class="col-md-6" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
-      <h1><%= @song.title %> - <%= @song.artist %></h1>
+    <div class="col-md-7" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
+      <h1><%= @song.title %> - <%= @song.artist %> <span style="display:inline;float:right">
+        <% if current_user && current_user.id == @song.user.id %>
+          <%= link_to edit_song_path(@song) do%>
+            <i class="fa fa-edit" data-toggle="tooltip" title="Edit" style="font-size:20px;"></i>
+          <%end%>
+        <% end %>
+      </span> </h1>
       <p style="font-color:#C0C0C0">Upload by - <%= @song.user.username %></p>
-      <h3> <span style="display:inline;"><%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;")%></span> <%= @song.description %> description</h3>
+      <h3> <span style="display:inline;"><%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;")%></span> <%= @song.description %> Bai nay hay vai lon</h3>
       <div class="container-fluid" style="padding:20px">
         <div class="row">
           <div class="col-xs-4" >
             <% if current_user %>
               <% if @song.likes.find_by(user_id: current_user) %>
                 <%= link_to [@song, @song.likes.build], method: :post do %>
-                  <i class="fa fa-heart" style="font-size:20px;color:red;"></i>
+                  <i class="fa fa-heart" data-toggle="tooltip" title="Unlike this song" style="font-size:30px;color:red;"></i>
                 <% end %>
-                <!-- <%= link_to '<i class="fa fa-heart"></i>', [@song, @song.likes.build], method: :post %> -->
               <% else %>
                 <%= link_to [@song, @song.likes.build], method: :post do%>
-                  <i class="fa fa-heart-o" style="font-size:20px;color:black;"></i>
+                  <i class="fa fa-heart-o" data-toggle="tooltip" title="Like this song" style="font-size:30px;color:black;"></i>
                 <% end %>
               <% end %>
             <% end %>
             <!-- <i class="fa fa-comment-o" style="display:inline;padding-left:5px;font-size:20px;cursor:pointer" id="comment_box"></i> -->
-            <i class="fa fa-download" data-toggle="tooltip" title="Download" style="display: inline;padding-left:10px;font-size:20px"></i>
+            <i class="fa fa-download" data-toggle="tooltip" title="Download" style="display: inline;padding-left:10px;font-size:30px"></i>
             <p><%= @song.likes.count %> <span style="display:inline;">
                 <% if @song.likes.count > 1%>
                   likes
@@ -36,18 +41,24 @@
       <%= render @song.comments %>
 
       <% if current_user %>
-        <h2>Add a comment:</h2>
         <%= render 'comments/form' %>
       <% end %>
-
-      <% if current_user && current_user.id == @song.user.id %>
-        <td><%= link_to 'Edit', edit_song_path(@song) %></td>
-      <% end %>
-
-      <%= link_to 'Back', songs_path %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1">
 
+    </div>
+    <div class="col-md-3" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;float:right;">
+      <!-- <table class="table">
+        <tr>
+          <th style="width:70%"></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>strong</th>
+          <th>hot vcl</th>
+        </tr>
+      </table> -->
+      <%= render 'hot_songs' %>
     </div>
   </div>
 </div>

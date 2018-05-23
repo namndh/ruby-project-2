@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
   <strong>User:</strong>
   <%= comment.user.username %>
 </p>
@@ -6,12 +6,49 @@
 <p>
   <strong>Comment:</strong>
   <%= comment.content %>
-</p>
+</p> -->
 
-<% if current_user && (current_user.id == comment.user.id || current_user.id == comment.song.id) %>
+<!-- <% if current_user && (current_user.id == comment.user.id || current_user.id == comment.song.id) %>
   <p>
     <%= link_to 'Destroy Comment', [comment.song, comment],
                 method: :delete,
                 data: {confirm: 'Are you sure?'} %>
   </p>
-<% end %>
+<% end %> -->
+<div class="actionBox">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-10">
+        <ul class="commentList" style="width:100%">
+            <li>
+                <div class="commenterImage">
+                    <p style="font-weight:bold;" ><%= comment.user.username %></p>
+                </div>
+                <div class="commentText">
+                    <!-- <p class="">Hello this is a test comment.</p>
+                    <span class="date sub-text">on March 5th, 2014</span> -->
+                    <%= comment.content %>
+                </div>
+            </li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <div class="dropdown" style="width:100%;padding-left:90px">
+          <button class="btn btn-default dropdown-toggle" style="border:none;" type="button" data-toggle="dropdown">
+          <span> <i class="fa fa-bars"></i> </span></button>
+          <ul class="dropdown-menu">
+            <li><% if current_user && (current_user.id == comment.user.id || current_user.id == comment.song.id) %>
+                <%= link_to 'Delete', [comment.song, comment],
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'} %>
+            <% end %></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

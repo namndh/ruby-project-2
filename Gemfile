@@ -37,6 +37,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
 gem 'plyr-rails'
+gem 'data-confirm-modal'
 
 group :development do
   gem 'better_errors'
