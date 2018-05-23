@@ -1,34 +1,56 @@
-<h1>Listing songs</h1>
+<div class="container-fluid" style="padding-top:50px">
+  <div class="row">
+    <div class="col-md-7">
+      <h1>Listing songs</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
-  </tr>
+      <table class="table">
+        <tr>
+          <th style="width:10%"></th>
+          <th style="width:20%">Songs</th>
+          <th style="width:15%">Artist</th>
+          <th>Description</th>
+          <th style="5%"></th>
+        </tr>
 
-  <% @songs.each do |song| %>
-    <tr>
-      <td><%= song.title %></td>
-      <td><%= song.artist %></td>
-      <td><%= link_to 'Show', song_path(song) %></td>
-      <% if current_user && current_user.id == song.user.id %>
-        <td><%= link_to 'Edit', edit_song_path(song) %></td>
-        <td><%= link_to 'Destroy', song_path(song),
-                        method: :delete,
-                        data: {confirm: 'Are you sure?'} %></td>
-      <% end %>
-      <% if current_user %>
-        <td>
-          <% if song.likes.find_by(user_id: current_user) %>
-            <%= link_to 'Unlike', [song, song.likes.build], method: :post %>
-          <% else %>
-            <%= link_to 'Like', [song, song.likes.build], method: :post %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+        <% @songs.each do |song| %>
+          <tr>
+            <td><%= image_tag(song.artwork.url(:thumb), style: "width:60px;")%></td>
+            <td><%= link_to song.title, song_path(song) %></td>
+            <td><%= song.artist %></td>
+            <td><%= song.description %></td>
+            <td>Dowload
+              <% if current_user && current_user.id == song.user.id %>
+                <%= link_to 'Edit', edit_song_path(song) %>
+                <%= link_to 'Destroy', song_path(song),
+                                method: :delete,
+                                data: {confirm: 'Are you sure?'} %>
+              <% end %>
+          </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <p><%= song.likes.count %> <span> <i class="fa fa-heart"></i> </span> </p>
+                  </div>
+                  <div class="col-xs-7">
+                    <% if current_user %>
+                      <% if song.likes.find_by(user_id: current_user) %>
+                        <%= link_to 'Unlike', [song, song.likes.build], method: :post %>
+                      <% else %>
+                        <%= link_to 'Like', [song, song.likes.build], method: :post%>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'New song', new_song_path %>

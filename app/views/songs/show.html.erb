@@ -1,32 +1,53 @@
-<h1><%= @song.title %> - <%= @song.artist %></h1>
-<p>
-  <strong>Title:</strong>
-  <%= @song.title %>
-</p>
+-<div class="container-fluid" style="padding-top:50px;">
+  <div class="row">
+    <div class="col-md-6" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
+      <h1><%= @song.title %> - <%= @song.artist %></h1>
+      <p style="font-color:#C0C0C0">Upload by - <%= @song.user.username %></p>
+      <h3> <span style="display:inline;"><%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;")%></span> <%= @song.description %> description</h3>
+      <div class="container-fluid" style="padding:20px">
+        <div class="row">
+          <div class="col-xs-4" >
+            <% if current_user %>
+              <% if @song.likes.find_by(user_id: current_user) %>
+                <%= link_to [@song, @song.likes.build], method: :post do %>
+                  <i class="fa fa-heart" style="font-size:20px;color:red;"></i>
+                <% end %>
+                <!-- <%= link_to '<i class="fa fa-heart"></i>', [@song, @song.likes.build], method: :post %> -->
+              <% else %>
+                <%= link_to [@song, @song.likes.build], method: :post do%>
+                  <i class="fa fa-heart-o" style="font-size:20px;color:black;"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+            <!-- <i class="fa fa-comment-o" style="display:inline;padding-left:5px;font-size:20px;cursor:pointer" id="comment_box"></i> -->
+            <i class="fa fa-download" data-toggle="tooltip" title="Download" style="display: inline;padding-left:10px;font-size:20px"></i>
+            <p><%= @song.likes.count %> <span style="display:inline;">
+                <% if @song.likes.count > 1%>
+                  likes
+                <% else %>
+                  like
+                <% end %>
+              </span> </p>
+          </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Artist:</strong>
-  <%= @song.artist %>
-</p>
+      <h2>Comments</h2>
+      <%= render @song.comments %>
 
-<% if current_user %>
-  <% if @song.likes.find_by(user_id: current_user) %>
-    <%= link_to 'Unlike', [@song, @song.likes.build], method: :post %>
-  <% else %>
-    <%= link_to 'Like', [@song, @song.likes.build], method: :post %>
-  <% end %>
-<% end %>
+      <% if current_user %>
+        <h2>Add a comment:</h2>
+        <%= render 'comments/form' %>
+      <% end %>
 
-<h2>Comments</h2>
-<%= render @song.comments %>
+      <% if current_user && current_user.id == @song.user.id %>
+        <td><%= link_to 'Edit', edit_song_path(@song) %></td>
+      <% end %>
 
-<% if current_user %>
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
-<% end %>
+      <%= link_to 'Back', songs_path %>
+    </div>
+    <div class="col-md-3">
 
-<% if current_user && current_user.id == @song.user.id %>
-  <td><%= link_to 'Edit', edit_song_path(@song) %></td>
-<% end %>
-
-<%= link_to 'Back', songs_path %>
+    </div>
+  </div>
+</div>

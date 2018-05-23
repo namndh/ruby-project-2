@@ -14,10 +14,10 @@
     </div>
   <% end %>
 
-  <p>
+  <div class="form-group">
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
 
   <p>
     <%= form.label :artist %><br>
@@ -27,9 +27,13 @@
   <div class="form-group">
     <%= form.label :file %>
     <%= form.file_field :file %>
-    <%= form.hidden_field :file_cache %>
+    <!-- <%= form.hidden_field :file_cache %> -->
   </div>
-
+  <div class="form-group">
+    <%= form.label :artwork %>
+    <%= form.file_field :artwork %>
+    <!-- <%= form.hidden_field :file_cache %> -->
+  </div>
   <p>
     <%= form.submit %>
   </p>

@@ -12,7 +12,7 @@ class SongUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "missing.jpg"
+    ""
   end
 
 end

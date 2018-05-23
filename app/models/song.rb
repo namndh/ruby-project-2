@@ -4,7 +4,7 @@ class Song < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   mount_uploader :file, SongUploader
-
+  mount_uploader :artwork, PicUploader
   validates :user_id, presence: true
   validates :file, presence: true
   validates :title, presence: true

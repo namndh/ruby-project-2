@@ -15,3 +15,12 @@
 //= require bootstrap-sprockets
 //= require_tree .
 // = require toastr
+//= require plyr
+document.addEventListener("turbolinks:load", function() {
+   const player = new Plyr('#player');
+ });
+toastr.options={"closeButton":true};
+
+$('i').on("click", function(e){
+  $('input').focus();
+})
