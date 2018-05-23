@@ -14,7 +14,7 @@
 
         <% @songs.each do |song| %>
           <tr>
-            <td><%= image_tag(song.artwork.url(:thumb), style: "width:60px;")%></td>
+            <td><%= image_tag(song.artwork.url(:thumb), style: "width:60px;") %></td>
             <td><%= link_to song.title, song_path(song) %></td>
             <td><%= song.artist %></td>
             <td><%= song.description %></td>

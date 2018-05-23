@@ -13,7 +13,8 @@ class SongsController < ApplicationController
 
   def index
     if params[:user_id]
-      @username = User.find(params[:user_id]).name
+      @user = User.find(params[:user_id])
+      @username = @user.name
       @songs = @user.songs
     else
       if current_user
