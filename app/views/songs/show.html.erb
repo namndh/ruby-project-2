@@ -1,9 +1,14 @@
--<div class="container-fluid" style="padding-top:50px;">
+<div class="container-fluid" style="padding-top:50px;">
   <div class="row">
     <div class="col-md-6" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
       <h1><%= @song.title %> - <%= @song.artist %></h1>
       <p style="font-color:#C0C0C0">Upload by - <%= @song.user.username %></p>
-      <h3> <span style="display:inline;"><%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;")%></span> <%= @song.description %> description</h3>
+      <h3> <span style="display:inline;"><%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;")%></span> <%= @song.description %> description
+        <audio controls>
+          <source src='<%= @song.file %>' type="audio/ogg">
+          Your browser does not support the audio element.
+        </audio>
+      </h3>
       <div class="container-fluid" style="padding:20px">
         <div class="row">
           <div class="col-xs-4" >

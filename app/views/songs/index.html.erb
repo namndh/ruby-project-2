@@ -9,37 +9,48 @@
           <th style="width:20%">Songs</th>
           <th style="width:15%">Artist</th>
           <th>Description</th>
-          <th style="5%"></th>
+          <th style="width:5%"></th>
         </tr>
 
         <% @songs.each do |song| %>
           <tr>
-            <td><%= image_tag(song.artwork.url(:thumb), style: "width:60px;")%></td>
+            <td><%= image_tag(song.artwork.url(:thumb), style: "width:60px;") %></td>
             <td><%= link_to song.title, song_path(song) %></td>
             <td><%= song.artist %></td>
             <td><%= song.description %></td>
-            <td>Dowload
+            <td>Download</td>
+            <td>
               <% if current_user && current_user.id == song.user.id %>
                 <%= link_to 'Edit', edit_song_path(song) %>
                 <%= link_to 'Destroy', song_path(song),
-                                method: :delete,
-                                data: {confirm: 'Are you sure?'} %>
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'} %>
               <% end %>
-          </td>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>
+                <audio controls>
+                  <source src='<%=song.file%>' type="audio/ogg">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-xs-4">
-                    <p><%= song.likes.count %> <span> <i class="fa fa-heart"></i> </span> </p>
+                    <p><%= song.likes.count %> <span> <i class="fa fa-heart"></i> </span></p>
                   </div>
                   <div class="col-xs-7">
                     <% if current_user %>
                       <% if song.likes.find_by(user_id: current_user) %>
                         <%= link_to 'Unlike', [song, song.likes.build], method: :post %>
                       <% else %>
-                        <%= link_to 'Like', [song, song.likes.build], method: :post%>
+                        <%= link_to 'Like', [song, song.likes.build], method: :post %>
                       <% end %>
                     <% end %>
                   </div>
