@@ -7,8 +7,14 @@ class SongsController < ApplicationController
   end
 
   def index
-    @newest_songs = Song.newest_songs.page(params[:page]).per(20)
     @hot_songs = Song.hot_songs.page(params[:page]).per(10)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @songs = @user.songs
+      @newest_songs = @songs.page(params[:page]).per(20)
+    else
+      @newest_songs = Song.newest_songs.page(params[:page]).per(20)
+    end
   end
 
   def new

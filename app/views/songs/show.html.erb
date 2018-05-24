@@ -19,7 +19,12 @@
           <% end %>
         </span>
       </h1>
-      <p style="font-color:#C0C0C0">Uploaded by <%= @song.user.username %></p>
+      <p style="font-color:#C0C0C0">
+        Uploaded by
+        <%= link_to user_songs_path(@song.user) do %>
+          <%= @song.user.username %>
+        <% end %>
+      </p>
       <h4>
         Description: <%= @song.description %>
       </h4>
