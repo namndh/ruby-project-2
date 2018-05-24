@@ -4,8 +4,7 @@
     <% if @song.errors.any? %>
       <div id="error_explanation">
         <h2>
-          <%= pluralize(@song.errors.count, "error") %> prohibited
-          this song from being saved:
+          <%= pluralize(@song.errors.count, "error") %> Error
         </h2>
         <ul>
           <% @song.errors.full_messages.each do |msg| %>
@@ -17,17 +16,17 @@
 
     <div class="form-group">
       <%= form.label :title %><br>
-      <%= form.text_field :title, class: 'form-control' %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
     </div>
 
     <div class="form-group">
       <%= form.label :artist %><br>
-      <%= form.text_field :artist, class: 'form-control' %>
+      <%= form.text_field :artist, class: 'form-control', required: true %>
     </div>
 
     <div class="form-group">
       <%= form.label :description %><br>
-      <%= form.text_area :description, class: 'form-control' %>
+      <%= form.text_area :description, class: 'form-control', required: true  %>
     </div>
 
     <div class="form-group">

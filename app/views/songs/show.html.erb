@@ -1,4 +1,9 @@
 <div style="float:right;padding-bottom:50px;padding-top:20px">
+  <% if current_user %>
+    <%= link_to my_songs_path do%>
+      <button type="button" name="button" class="btn btn-primary" style="margin-left:10px">My songs</button>
+    <%end%>
+  <% end %>
   <%= link_to new_song_path do %>
     <button type="button" name="button" class="btn btn-success">Share your music</button>
   <% end %>
