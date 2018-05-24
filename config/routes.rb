@@ -17,7 +17,4 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
   get 'search', to: 'search#index', as: :search
-  # get 'login', to: 'sessions#new', as: :login
-  # get 'signup', to: 'users#new', as: :signup
-  # delete 'logout', to: 'sessions#destroy', as: :logout
 end

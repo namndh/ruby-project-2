@@ -29,9 +29,9 @@
         </li>
         <!-- <%= render 'layouts/navigation_links' %> -->
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" action="/search" method="get">
         <div class="input-group stylish-input-group" style="width:100%">
-          <input type="text" class="form-control" placeholder="Search" style="width:100%">
+          <input name="query" type="text" class="form-control" placeholder="Search" style="width:100%">
           <span class="input-group-addon">
               <button type="submit" style="padding-right:0">
               <span class="fa fa-search"></span>
