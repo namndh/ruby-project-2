@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :likes
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
-  validates :username, presence: :true, uniqueness: { case_sensitive: false }
+  validates :username, presence: :true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
 
   def set_default_role
     self.role ||= :user

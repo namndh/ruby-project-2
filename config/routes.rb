@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
   authenticated :user do
-    root :to =>'songs#index'
-  # get 'hot_songs', to: 'songs#hot_songs'
-  # get 'my_songs', to: 'songs#my_songs'
+    root :to => 'songs#index'
+    get 'my_songs', to: 'songs#my_songs', as: :my_songs
   end
   root :to => 'visitors#index'
   namespace :admin do
     resources :users
     root to: "users#index"
   end
-  # root t: 'visitors#index'
   devise_for :users
   resources :users do
     resources :songs

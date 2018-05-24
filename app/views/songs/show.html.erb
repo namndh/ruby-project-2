@@ -1,43 +1,50 @@
 <div style="float:right;padding-bottom:50px;padding-top:20px">
-  <%= link_to new_song_path do%>
+  <%= link_to new_song_path do %>
     <button type="button" name="button" class="btn btn-success">Share your music</button>
-  <%end%>
+  <% end %>
 </div>
 <div class="container-fluid" style="padding-top:70px;">
   <div class="row">
     <div class="col-md-7" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
-      <h1><%= @song.title %> - <%= @song.artist %> <span style="display:inline;float:right">
-        <% if current_user && current_user.id == @song.user.id %>
-          <%= link_to edit_song_path(@song) do%>
-            <i class="fa fa-edit" data-toggle="tooltip" title="Edit" style="font-size:20px;"></i>
-          <%end%>
-        <% end %>
-      </span> </h1>
-      <p style="font-color:#C0C0C0">Upload by - <%= @song.user.username %></p>
-      <h3> <span style="display:inline;"><%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;")%></span> <%= @song.description %> description
-      </h3>
+      <h1>
+        <span style="display:inline;">
+          <%= image_tag(@song.artwork.url(:thumb), style: "width:60px;display:inline;") %>
+        </span>
+        <%= @song.title %> - <%= @song.artist %>
+        <span style="display:inline;float:right">
+          <% if current_user && current_user.id == @song.user.id %>
+            <%= link_to edit_song_path(@song) do %>
+              <i class="fa fa-edit" data-toggle="tooltip" title="Edit" style="font-size:20px;"></i>
+            <% end %>
+          <% end %>
+        </span>
+      </h1>
+      <p style="font-color:#C0C0C0">Uploaded by <%= @song.user.username %></p>
+      <h4>
+        Description: <%= @song.description %>
+      </h4>
       <div class="container-fluid" style="padding:20px">
         <div class="row">
-          <div class="col-xs-4" >
+          <div class="col-xs-4">
             <% if current_user %>
               <% if @song.likes.find_by(user_id: current_user) %>
                 <%= link_to [@song, @song.likes.build], method: :post do %>
                   <i class="fa fa-heart" data-toggle="tooltip" title="Unlike this song" style="font-size:30px;color:red;"></i>
                 <% end %>
               <% else %>
-                <%= link_to [@song, @song.likes.build], method: :post do%>
+                <%= link_to [@song, @song.likes.build], method: :post do %>
                   <i class="fa fa-heart-o" data-toggle="tooltip" title="Like this song" style="font-size:30px;color:black;"></i>
                 <% end %>
               <% end %>
             <% end %>
             <!-- <i class="fa fa-comment-o" style="display:inline;padding-left:5px;font-size:20px;cursor:pointer" id="comment_box"></i> -->
             <p><%= @song.likes.count %> <span style="display:inline;">
-                <% if @song.likes.count > 1%>
+                <% if @song.likes.count > 1 %>
                   likes
                 <% else %>
                   like
                 <% end %>
-              </span> </p>
+              </span></p>
           </div>
         </div>
       </div>
@@ -65,22 +72,22 @@
           <th style="width:30%"></th>
         </tr>
         <% @hot_songs.each do |hot_song| %>
-        <tr>
-          <td><%= link_to hot_song.title, song_path(hot_song) %></td>
-          <td>
-            <%= hot_song.likes.count %> <span style="display:inline;">
-                <% if hot_song.likes.count > 1%>
+          <tr>
+            <td><%= link_to hot_song.title, song_path(hot_song) %></td>
+            <td>
+              <%= hot_song.likes.count %> <span style="display:inline;">
+                <% if hot_song.likes.count > 1 %>
                   likes
                 <% else %>
                   like
                 <% end %>
             </span>
-          </td>
+            </td>
 
-        </tr>
-        <%end%>
+          </tr>
+        <% end %>
       </table>
-    <%= paginate @hot_songs, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+      <%= paginate @hot_songs, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
     </div>
   </div>
 </div>

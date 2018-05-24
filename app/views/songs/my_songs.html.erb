@@ -1,0 +1,112 @@
+<div style="float:right;padding-bottom:50px;padding-top:20px">
+    <%= link_to new_song_path do%>
+    <button type="button" name="button" class="btn btn-success" style="margin-left:10px">Share your music</button>
+    <%end%>
+</div>
+<div class="container-fluid" style="padding-top:100px">
+    <div class="row">
+        <div class="col-md-7"  style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;">
+            <h4>My Songs</h4>
+
+            <table class="table">
+                <tr>
+                    <th style="width:10%"></th>
+                    <th style="width:20%">Songs</th>
+                    <th style="width:15%">Artist</th>
+                    <th>Description</th>
+                    <th style="width: 25%"></th>
+                </tr>
+
+                <% @my_songs.each do |song| %>
+                <tr>
+                    <td><%= image_tag(song.artwork.url(:thumb), style: "width:60px;") %></td>
+                    <td><%= link_to song.title, song_path(song) %></td>
+                    <td><%= song.artist %></td>
+                    <td><%= song.description %></td>
+                    <td>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-4" style="margin-top:5px;">
+                                    <% if current_user %>
+                                    <% if song.likes.find_by(user_id: current_user) %>
+                                    <%= link_to [song, song.likes.build], method: :post do %>
+                                    <i class="fa fa-heart" data-toggle="tooltip" title="Unlike this song" style="font-size:20px;color:red;"></i>
+                                    <% end %>
+                                    <% else %>
+
+                                    <%= link_to [song, song.likes.build], method: :post do%>
+                                    <i class="fa fa-heart-o" data-toggle="tooltip" title="Like this song" style="font-size:20px;color:black;"></i>
+                                    <% end %>
+                                    <% end %>
+                                    <% end %>
+                                </div>
+                                <div class="col-xs-4" style="margin-top:5px;">
+                                    <p><%= song.likes.count %> <span style="display:inline;">
+                        <% if song.likes.count > 1%>
+                          likes
+                        <% else %>
+                          like
+                        <% end %>
+                      </span> </p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <% if current_user && current_user.id == song.user.id %>
+                                    <div class="dropdown" style="width:100%;">
+                                        <button class="btn btn-default dropdown-toggle" style="border:none;" type="button" data-toggle="dropdown">
+                                            <span> <i class="fa fa-bars" data-toggle="tooltip" title="Options"></i> </span></button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <%= link_to 'Edit', edit_song_path(song) %>
+                                            </li>
+                                            <li>
+                                                <%= link_to 'Destroy', song_path(song),
+                                                method: :delete,
+                                                data: {confirm: 'Are you sure?'} %>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <!-- <tr>
+                  <td colspan="2">
+
+                  </td>
+                  <td colspan="3"></td>
+                </tr> -->
+                <% end %>
+            </table>
+            <%= paginate @my_songs, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+        </div>
+        <div class="col-md-3" style="background-color:#fafafa;border-radius: 3px;border: 1px solid #e6e6e6;float:right;">
+            <h4>Hotest Songs</h4>
+            <table class="table">
+                <tr>
+                    <th style="width:70%"></th>
+                    <th style="width:30%"></th>
+                </tr>
+                <% @hot_songs.each do |hot_song| %>
+                <tr>
+                    <td><%= link_to hot_song.title, song_path(hot_song) %></td>
+                    <td>
+                        <%= hot_song.likes.count %> <span style="display:inline;">
+                <% if hot_song.likes.count > 1%>
+                  likes
+                <% else %>
+                  like
+                <% end %>
+            </span>
+                    </td>
+
+                </tr>
+                <%end%>
+            </table>
+            <%= paginate @hot_songs, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+        </div>
+    </div>
+</div>

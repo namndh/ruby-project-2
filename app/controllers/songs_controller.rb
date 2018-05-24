@@ -1,17 +1,13 @@
 class SongsController < ApplicationController
 
-  def hot_songs
-    @songs = Song.hot_songs
-    # @new_songs = Song.all.order("created_at desc")
-  end
-
   def my_songs
-    @songs = current_user.songs
-    render 'songs'
+    @my_songs = current_user.songs.page(params[:page]).per(20)
+    @hot_songs = Song.hot_songs.page(params[:page]).per(10)
+    render 'my_songs'
   end
 
   def index
-    @newest_songs = Song.all.order("created_at desc").page(params[:page]).per(20)
+    @newest_songs = Song.newest_songs.page(params[:page]).per(20)
     @hot_songs = Song.hot_songs.page(params[:page]).per(10)
   end
 

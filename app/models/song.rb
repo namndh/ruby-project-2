@@ -10,7 +10,7 @@ class Song < ApplicationRecord
   validates :title, presence: true
 
   scope :hot_songs, -> {joins(:likes).group('songs.id').order('count(likes.id) desc').limit(10)}
-
+  scope :newest_songs, -> {order("created_at desc")}
   def self.search(search)
     # titleStr = title ? title : ''
     # artistStr = artist ? artist : ''
